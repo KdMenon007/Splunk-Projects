@@ -1,0 +1,3 @@
+index=win EventCode IN (4624, 4625) user="david.chen"
+| table _time, host, user, EventCode, Logon_Type, IpAddress, WorkstationName, Status, SubStatus, AuthenticationPackageName
+| sort 0 _time

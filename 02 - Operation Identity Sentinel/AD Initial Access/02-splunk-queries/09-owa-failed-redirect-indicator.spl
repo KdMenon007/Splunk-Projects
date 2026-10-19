@@ -1,0 +1,3 @@
+index=iis cs_uri_stem="/owa/auth/logon.aspx" cs_uri_query="*reason=2*"
+| table _time host c_ip cs_method cs_uri_stem cs_uri_query sc_status
+| sort 0 _time

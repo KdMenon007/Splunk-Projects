@@ -1,0 +1,3 @@
+index=win EventCode IN (6272, 6273)
+| table _time, host, EventCode, User_Account_Name, Client_IP_Address, Reason_Code, *Policy*, *Authentication*
+| sort 0 _time

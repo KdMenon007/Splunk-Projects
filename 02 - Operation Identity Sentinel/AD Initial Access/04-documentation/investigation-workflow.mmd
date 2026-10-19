@@ -1,0 +1,13 @@
+flowchart TD
+ A[Start with IIS / OWA / endpoint telemetry] --> B[Validate indexes, fields, host, and time range]
+ B --> C[Find concentrated 404s and URI discovery]
+ C --> D[Inspect suspicious ASP.NET paths and POST requests]
+ D --> E[Correlate file creation and w3wp.exe child processes]
+ E --> F{Same host and normalized timeline?}
+ F -- No --> G[Keep findings separate; gather more evidence]
+ F -- Yes --> H[Build timeline and assess web-shell hypothesis]
+ B --> I[Count OWA POSTs and inspect redirect parameters]
+ I --> J[Correlate 4624 / 4625 and account context]
+ J --> K[Check DC authentication and post-login activity]
+ H --> L[Scope impact and record confidence]
+ K --> L

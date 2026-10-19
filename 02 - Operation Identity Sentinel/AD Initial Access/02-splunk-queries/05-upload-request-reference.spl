@@ -1,0 +1,3 @@
+index=iis cs_method=POST cs_uri_query="*shell.aspx*"
+| table _time host c_ip cs_uri_stem cs_uri_query sc_status
+| sort 0 _time

@@ -1,0 +1,3 @@
+index=iis c_ip="198.51.100.23" sc_status=200
+| stats count by cs_uri_stem
+| sort - count

@@ -1,0 +1,3 @@
+index=win EventCode=11 TargetFilename="*error.aspx"
+| table _time, host, ComputerName, Image, TargetFilename, EventCode
+| sort _time

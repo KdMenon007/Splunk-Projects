@@ -1,0 +1,26 @@
+Evidence ID,Filename,Observed detail,Interpretation,Confidence / caveat
+E-01,01-environment-attack-surface.png,Standalone server compared with AD-connected environment,Context diagram,Illustrative
+E-02,02-iis-ad-authentication-flow.png,IIS request and AD authentication log flow,Log-source mapping,Illustrative
+E-03,03-iis-log-location.png,IIS log path C:\inetpub\logs\LogFiles\W3SVC1,Collection context,Path shown in screenshot
+E-04,04-webshell-flow.png,Discovery to upload to command execution,Investigation hypothesis,Diagram is explanatory
+E-05,05-process-tree-normal-vs-suspicious.png,w3wp.exe vs child cmd.exe,Detection context,Validate raw event
+E-06,06-iis-404-source-count.png,114 404 events for 203.0.113.47,Scanning lead,TEST-NET-3 example IP
+E-07,07-source-uri-breakdown.png,163 events and 120 URI values,URI discovery,Captured-session counts
+E-08,08-shell-query-commands.png,Shell endpoint query strings include discovery commands,Command-execution lead,Confirm same host/time
+E-09,09-process-creation-parent-w3wp.png,w3wp.exe parent with cmd.exe child commands,Execution lead,Review csc.exe separately
+E-10,10-sysmon-file-create-shell.png,Event ID 11 target path ends in shell.aspx,Possible deployment,Verify file and host
+E-11,11-upload-post-request.png,POST upload handler references file=shell.aspx,Possible upload,HTTP 200 does not prove file write
+E-12,12-owa-post-count.png,16 OWA POSTs in five-minute bucket,Credential-attack lead,Tune threshold to baseline
+E-13,13-owa-redirect-reason2.png,reason=2 shown in redirect,Failed-login lead,Validate Exchange version behavior
+E-14,16-windows-4625-summary.png,Counts by user and logon type,Account pivot,Verify fields and host
+E-15,17-user-auth-timeline.png,4624 and 4625 events for sarah.kim,Timeline pivot,4624 visibly precedes later failures
+E-16,14-iis-windows-log-correlation.png,IIS OWA requests alongside 4624 for michelle.smith,Correlation example,May be a separate time slice
+E-17,19-vpn-radius-nps-authentication-flow.png,VPN gateway forwards authentication to NPS over RADIUS; NPS communicates with domain controller,VPN authentication architecture and log-source map,Illustrative diagram; confirm lab configuration
+E-18,20-nps-denials-by-account-client-ip.png,"12 EventCode 6273 results: david.chen=10, liam.patel=1, michelle.smith=1; client 10.5.10.200 for all",Credential-failure scope; David Chen is highest-count account lead,Captured search result only; client address is likely RADIUS client/gateway
+E-19,21-david-chen-windows-auth-timeline.png,Ten EventCode 4625 rows for david.chen followed by EventCode 4624 at about 10:47:05 on THM-DC,Possible failed-authentication cluster followed by success,"Correlate raw events, source, logon type, status/substatus, and NPS timestamps"
+E-20,22-nps-auth-event-field-mapping-check.png,NPS 6272/6273 result table shows dash/blank account field despite account filter,Field extraction/filter mismatch requiring raw-event validation,Do not treat 6272 as verified successful NPS authentication for David
+E-23,23-error-aspx-404-source-count.png,21 captured IIS 404 events for 198.51.100.23,Scanning/path-enumeration lead,Screenshot observation; documentation-range IP
+E-24,24-error-aspx-successful-uri-breakdown.png,"Nine HTTP 200 events; five error.aspx, two upload.aspx, one internalapp/, one default.aspx",Successful endpoint requests for investigation,HTTP 200 is not proof of exploitation
+E-25,25-error-aspx-command-query-timeline.png,"GET requests to error.aspx with hostname, tasklist, netstat and enumeration-like query values",Possible web-shell command interface,Query values do not prove commands executed
+E-26,26-error-aspx-upload-post-request.png,POST to /internalapp/upload.aspx with file=error.aspx and status 200,Possible upload path,Correlate with file-create telemetry
+E-27,27-error-aspx-sysmon-file-create.png,Sysmon Event ID 11 result matching error.aspx on THM-WEB-SRV.tryhatmestudios.thm,Potential file creation,Verify full path and raw event/time correlation

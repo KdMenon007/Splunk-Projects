@@ -1,0 +1,3 @@
+index=win EventCode IN (4624,4625) user="sarah.kim"
+| table _time host EventCode user Logon_Type Process_Name src_ip
+| sort 0 _time

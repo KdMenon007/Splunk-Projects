@@ -1,0 +1,5 @@
+index=iis cs_uri_stem="/owa/auth.owa" cs_method=POST
+| bin _time span=5m
+| stats count by _time c_ip
+| where count > 10
+| sort - count

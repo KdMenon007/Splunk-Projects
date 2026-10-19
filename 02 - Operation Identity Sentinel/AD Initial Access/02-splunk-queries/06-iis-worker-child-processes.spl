@@ -1,0 +1,3 @@
+index=win EventCode=1 ParentImage="*\\w3wp.exe"
+| table _time host ParentImage Image CommandLine User
+| sort 0 _time

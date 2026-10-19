@@ -1,0 +1,3 @@
+index=iis sc_status=404
+| stats count by c_ip
+| sort - count
