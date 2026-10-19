@@ -1,0 +1,10 @@
+flowchart LR
+    A[Windows endpoints / lab data] --> B[Forwarder or data input]
+    B --> C[Splunk ingestion and parsing]
+    C --> D[Index: windowslogs]
+    D --> E[Search & Reporting / SPL]
+    E --> F[Field exploration and filtering]
+    E --> G[Statistics and timecharts]
+    E --> H[Hunt and investigation]
+    H --> I[Evidence register and reports]
+    I --> J[Reviewed portfolio package]

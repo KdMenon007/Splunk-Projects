@@ -1,0 +1,11 @@
+flowchart TD
+    A[Define hunt hypothesis] --> B[Confirm data source and time range]
+    B --> C[Run baseline SPL query]
+    C --> D{Relevant events found?}
+    D -- No --> E[Record no-hit result and telemetry limits]
+    D -- Yes --> F[Inspect raw events and fields]
+    F --> G[Correlate with supporting telemetry]
+    G --> H{Evidence sufficient?}
+    H -- No --> I[Document uncertainty and collect more evidence]
+    H -- Yes --> J[Determine disposition]
+    J --> K[Document findings and recommended actions]

@@ -1,0 +1,8 @@
+flowchart TD
+    A[Identify log source] --> B[Configure input / forwarder]
+    B --> C[Validate connectivity and ingestion]
+    C --> D[Check index, host, source, sourcetype]
+    D --> E[Inspect raw event and timestamp]
+    E --> F[Validate field extractions]
+    F --> G[Build and test SPL searches]
+    G --> H[Document configuration and evidence]
