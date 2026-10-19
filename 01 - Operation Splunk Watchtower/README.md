@@ -1,5 +1,7 @@
 # Operation Splunk Watchtower
 
+![Project Banner](evidence/project-banner.png)
+
 **Organization:** CatchMe  
 **Project:** Splunk SIEM fundamentals, implementation, and threat-hunting foundations  
 **Status:** In progress — evidence collected for Exploring SPL, initial SOC lab setup, and the Dashboards and Reports module. Data manipulation remains pending.
