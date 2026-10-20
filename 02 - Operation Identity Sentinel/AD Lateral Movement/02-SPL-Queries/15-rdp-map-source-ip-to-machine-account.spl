@@ -1,0 +1,4 @@
+# Replace the source IP with Source_Network_Address from the destination logon.
+index=win EventCode=4624 Source_Network_Address=10.5.30.120 user=*$
+| stats count by user, Source_Network_Address
+| sort -count

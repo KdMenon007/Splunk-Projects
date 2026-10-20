@@ -1,0 +1,3 @@
+index=challenge EventCode=5140 host=THM-SHR-SRV
+| table _time, user, Source_Address
+| sort _time

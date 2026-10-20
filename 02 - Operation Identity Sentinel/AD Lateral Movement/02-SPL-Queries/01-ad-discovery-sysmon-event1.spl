@@ -1,0 +1,4 @@
+index=win EventCode=1
+| search CommandLine IN ("*nltest*", "*net * user*", "*net * group*", "*net * view*", "*net * localgroup*")
+| table _time, host, User, Image, CommandLine, ParentImage
+| sort _time

@@ -1,0 +1,5 @@
+# Find discovery commands on the DC and capture LogonId for correlation.
+index=win EventCode=1 host=THM-DC
+| search CommandLine IN ("*nltest*", "*net * user*", "*net * group*", "*net * view*")
+| table _time, host, User, Image, CommandLine, LogonId
+| sort _time

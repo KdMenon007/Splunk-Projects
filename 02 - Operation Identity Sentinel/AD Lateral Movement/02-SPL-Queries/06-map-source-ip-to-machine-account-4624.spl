@@ -1,0 +1,3 @@
+index=win EventCode=4624 Source_Network_Address="10.5.50.12" user="*$"
+| stats count by user, Source_Network_Address
+| sort - count

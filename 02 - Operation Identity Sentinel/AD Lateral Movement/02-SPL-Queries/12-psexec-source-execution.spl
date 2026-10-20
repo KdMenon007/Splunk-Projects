@@ -1,0 +1,4 @@
+index=win EventCode=1 host="THM-MKT-WS"
+| search Image="*PsExec*"
+| table _time, host, User, Image, CommandLine
+| sort _time

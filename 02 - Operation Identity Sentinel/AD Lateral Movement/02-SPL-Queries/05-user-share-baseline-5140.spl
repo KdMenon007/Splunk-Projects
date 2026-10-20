@@ -1,0 +1,3 @@
+index=win EventCode=5140 user="luke.sullivan"
+| table _time, Source_Address, Share_Name, host
+| sort _time

@@ -1,0 +1,4 @@
+# Replace the Logon_ID with the value from the suspicious process event.
+index=win EventCode=4624 host=THM-DC Logon_ID=0x508C55A
+| table _time, user, Logon_Type, Source_Network_Address, Logon_ID
+| sort _time

@@ -1,0 +1,4 @@
+# Review successful RemoteInteractive logons; validate host/user baselines.
+index=win EventCode=4624 Logon_Type=10
+| table _time, host, user, Source_Network_Address, Logon_ID
+| sort _time

@@ -1,0 +1,3 @@
+index=win EventCode=7045
+| table _time, host, Service_Name, Service_File_Name, Service_Type, Service_Start_Type, Service_Account
+| sort _time

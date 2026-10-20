@@ -1,0 +1,3 @@
+index=win EventCode=5145 host="THM-SQL-SRV" Relative_Target_Name="*PSEXE*"
+| table _time, user, Source_Address, Share_Name, Relative_Target_Name
+| sort _time

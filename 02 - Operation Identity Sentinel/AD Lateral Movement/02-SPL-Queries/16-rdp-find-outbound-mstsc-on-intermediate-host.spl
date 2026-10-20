@@ -1,0 +1,4 @@
+# Search for the RDP client on the intermediate server.
+index=win EventCode=1 host=THM-SQL-SRV Image="*mstsc.exe*"
+| table _time, User, Image, CommandLine, LogonId
+| sort _time

@@ -1,0 +1,4 @@
+# Correlate the mstsc.exe LogonId with a successful logon on that host.
+index=win EventCode=4624 host=THM-SQL-SRV Logon_ID=0x3C572BD
+| table _time, user, Logon_Type, Source_Network_Address, Logon_ID
+| sort _time

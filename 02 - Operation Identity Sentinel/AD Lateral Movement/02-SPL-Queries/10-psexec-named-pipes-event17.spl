@@ -1,0 +1,3 @@
+index=win EventCode=17 Image="*PSEXESVC*"
+| table _time, host, Image, PipeName
+| sort _time

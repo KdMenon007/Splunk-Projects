@@ -1,0 +1,3 @@
+index=challenge EventCode=7045 host=THM-SHR-SRV
+| table _time, service_path
+| sort _time

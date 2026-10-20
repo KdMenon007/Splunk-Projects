@@ -1,0 +1,26 @@
+evidence_id,file,topic,notes
+EV-01,01-AD-Discovery-Concept.png,AD Discovery Concept,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-02,02-Compromised-Host-Network-Map.png,Compromised Host Network Map,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-03,03-Authenticate-Execute-Lateral-Movement.png,Authenticate Execute Lateral Movement,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-04,04-Source-Destination-Correlation.png,Source Destination Correlation,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-05,05-Sysmon-AD-Discovery-Query-Results.png,Sysmon AD Discovery Query Results,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-06,06-PowerShell-AD-Discovery-Query-Results.png,PowerShell AD Discovery Query Results,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-07,07-Explicit-Credentials-Event-4648.png,Explicit Credentials Event 4648,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-08,08-Sysmon-Net-Use-Command-REDACTED.png,Sysmon Net Use Command REDACTED,Password-bearing command line redacted for safe portfolio sharing.
+EV-09,09-Admin-Share-Event-5140.png,Admin Share Event 5140,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-10,10-Admin-Share-User-Baseline.png,Admin Share User Baseline,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-11,11-Source-Host-Mapping-Event-4624.png,Source Host Mapping Event 4624,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-12,12-PsExec-Service-Install-Event-7045.png,PsExec Service Install Event 7045,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-13,13-PsExec-Child-Process-Event-1.png,PsExec Child Process Event 1,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-14,14-PsExec-Named-Pipes-Event-17.png,PsExec Named Pipes Event 17,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-15,15-PsExec-Named-Pipe-Results.png,PsExec Named Pipe Results,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-16,16-PsExec-Source-Execution-Query.png,PsExec Source Execution Query,Supplied screenshot/diagram; verify the corresponding query and context in Splunk.
+EV-17,17-RDP-Chaining-Concept.png,17 RDP Chaining Concept,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-18,18-RDP-Source-Host-or-Client-Query.png,18 RDP Source Host or Client Query,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-19,19-RDP-Logon-Correlation.png,19 RDP Logon Correlation,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-20,20-Challenge-Service-Install-or-Process-Evidence.png,20 Challenge Service Install or Process Evidence,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-21,21-Challenge-Command-Execution-Results.png,21 Challenge Command Execution Results,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-22,22-Challenge-Service-Path-Event-7045.png,22 Challenge Service Path Event 7045,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-23,23-Challenge-Admin-Share-Event-5140.png,23 Challenge Admin Share Event 5140,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-24,24-Challenge-Sysmon-CommandLine-Results.png,24 Challenge Sysmon CommandLine Results,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.
+EV-25,25-Challenge-Source-Host-Logon-4624.png,25 Challenge Source Host Logon 4624,Supplied screenshot from the lateral-movement lab; corroborate with the corresponding raw event and query.

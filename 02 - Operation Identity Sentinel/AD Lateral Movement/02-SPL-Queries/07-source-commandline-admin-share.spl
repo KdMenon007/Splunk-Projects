@@ -1,0 +1,3 @@
+index=win EventCode=1 host="THM-MKT-WS" CommandLine="*ADMIN$*"
+| table _time, User, Image, CommandLine
+| sort _time

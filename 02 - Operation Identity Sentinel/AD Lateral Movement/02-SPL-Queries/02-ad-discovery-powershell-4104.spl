@@ -1,0 +1,4 @@
+index=win EventCode=4104
+| search Message IN ("*Get-ADUser*", "*Get-ADGroupMember*", "*Get-ADComputer*")
+| table _time, host, Message
+| sort _time
