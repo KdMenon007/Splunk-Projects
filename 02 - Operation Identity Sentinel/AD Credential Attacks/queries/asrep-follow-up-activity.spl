@@ -1,0 +1,4 @@
+index=task7 (EventCode=4624 OR EventCode=4769)
+| search Account_Name="mia.turner"
+| table _time, EventCode, Account_Name, Client_Address
+| sort _time

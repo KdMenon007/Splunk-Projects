@@ -1,0 +1,3 @@
+index=task7 EventCode=10 TargetImage="*\\lsass.exe"
+| table _time, host, SourceImage, SourceUser, TargetImage, GrantedAccess, CallTrace
+| sort _time

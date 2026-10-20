@@ -1,0 +1,3 @@
+index=task5 EventCode=4662 Access_Mask=0x100 user="adm-luke.sullivan" "1131f6ad"
+| table _time, host, user, Logon_ID
+| sort _time

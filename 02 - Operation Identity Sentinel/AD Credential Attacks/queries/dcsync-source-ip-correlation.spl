@@ -1,0 +1,3 @@
+index=task5 EventCode=4624 Logon_ID=0x5A01668
+| table _time, host, user, Source_Network_Address, Logon_Type
+| sort _time

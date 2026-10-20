@@ -1,0 +1,3 @@
+index=task4 EventCode=10 TargetImage="*\\lsass.exe" SourceImage="*\\procdump64.exe"
+| table _time, SourceImage, SourceUser, GrantedAccess, CallTrace
+| sort _time

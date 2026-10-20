@@ -1,0 +1,5 @@
+index=task7 EventCode=4769 Service_Name!="*$" Service_Name!="krbtgt"
+| bin _time span=5m
+| stats dc(Service_Name) as unique_spns count by Account_Name, Client_Address, _time
+| where unique_spns > 5
+| sort - unique_spns

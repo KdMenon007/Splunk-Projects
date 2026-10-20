@@ -1,0 +1,3 @@
+index=task3 EventCode=4768
+| table _time, Account_Name, Pre_Authentication_Type, Ticket_Encryption_Type, Client_Address
+| sort _time

@@ -1,0 +1,33 @@
+filename,evidence_type,description,validation_note
+01-kerberoasting-attack-flow.png,diagram or Splunk screenshot,01 kerberoasting attack flow,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+02-normal-vs-kerberoasting-pattern.png,diagram or Splunk screenshot,02 normal vs kerberoasting pattern,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+03-kerberoasting-rc4-results.png,diagram or Splunk screenshot,03 kerberoasting rc4 results,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+04-kerberoasting-targeted-services-query.png,diagram or Splunk screenshot,04 kerberoasting targeted services query,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+05-kerberoasting-volume-detection-query.png,diagram or Splunk screenshot,05 kerberoasting volume detection query,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+06-normal-kerberos-authentication-flow.png,diagram or Splunk screenshot,06 normal kerberos authentication flow,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+07-as-rep-roasting-attack-flow.png,diagram or Splunk screenshot,07 as rep roasting attack flow,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+08-as-rep-follow-up-decision-flow.png,diagram or Splunk screenshot,08 as rep follow up decision flow,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+09-as-rep-tgt-events-results.png,diagram or Splunk screenshot,09 as rep tgt events results,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+10-as-rep-preauth-disabled-query.png,diagram or Splunk screenshot,10 as rep preauth disabled query,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+11-as-rep-follow-up-search-no-results.png,diagram or Splunk screenshot,11 as rep follow up search no results,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+12-lsass-credential-material-overview.png,diagram or Splunk screenshot,12 lsass credential material overview,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+13-lsass-dumping-attack-flow.png,diagram or Splunk screenshot,13 lsass dumping attack flow,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+14-lsass-calltrace-pattern-comparison.png,diagram or Splunk screenshot,14 lsass calltrace pattern comparison,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+15-sysmon-lsass-access-baseline.png,diagram or Splunk screenshot,15 sysmon lsass access baseline,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+16-procdump-lsass-calltrace-evidence.png,diagram or Splunk screenshot,16 procdump lsass calltrace evidence,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+17-dcsync-normal-replication-vs-attack.png,diagram or Splunk screenshot,17 dcsync normal replication vs attack,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+18-dcsync-source-ip-correlation-diagram.png,diagram or Splunk screenshot,18 dcsync source ip correlation diagram,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+19-dcsync-event-4662-search-result.png,diagram or Splunk screenshot,19 dcsync event 4662 search result,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+20-dcsync-replication-guid-evidence.png,diagram or Splunk screenshot,20 dcsync replication guid evidence,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+21-dcsync-logon-id-search-result.png,diagram or Splunk screenshot,21 dcsync logon id search result,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+22-dcsync-event-4624-source-ip-result.png,diagram or Splunk screenshot,22 dcsync event 4624 source ip result,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+23-ntds-dit-extraction-flow.png,diagram or Splunk screenshot,23 ntds dit extraction flow,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+24-dcsync-vs-ntds-dit-extraction.png,diagram or Splunk screenshot,24 dcsync vs ntds dit extraction,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+25-ntdsutil-process-creation-event.png,diagram or Splunk screenshot,25 ntdsutil process creation event,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+26-ntds-dit-file-creation-event.png,diagram or Splunk screenshot,26 ntds dit file creation event,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+27-vssadmin-shadow-copy-event.png,diagram or Splunk screenshot,27 vssadmin shadow copy event,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+28-shadow-copy-ntds-and-system-copy-events.png,diagram or Splunk screenshot,28 shadow copy ntds and system copy events,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+29-asrep-roasting-detection-results.png,diagram or Splunk screenshot,29 asrep roasting detection results,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+30-kerberoasting-targeted-service-counts.png,diagram or Splunk screenshot,30 kerberoasting targeted service counts,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+31-lsass-process-access-results.png,diagram or Splunk screenshot,31 lsass process access results,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
+32-dcsync-event-4662-results-expanded.png,diagram or Splunk screenshot,32 dcsync event 4662 results expanded,Captured lab evidence; validate index/fields and interpret with surrounding telemetry.
