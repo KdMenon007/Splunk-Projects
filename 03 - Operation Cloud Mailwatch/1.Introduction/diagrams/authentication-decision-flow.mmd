@@ -1,0 +1,16 @@
+flowchart TD
+ A[Sign-in attempt] --> B[Collect signals]
+ B --> C[User and location]
+ B --> D[Device and client]
+ B --> E[Application]
+ B --> F[Risk and policy context]
+ C --> G[Evaluate authentication and Conditional Access]
+ D --> G
+ E --> G
+ F --> G
+ G --> H{Decision}
+ H -->|Allowed| I[Access may proceed]
+ H -->|MFA required| J[Complete additional verification]
+ H -->|Blocked| K[Access denied]
+ I --> L[Monitor service activity]
+ J --> L

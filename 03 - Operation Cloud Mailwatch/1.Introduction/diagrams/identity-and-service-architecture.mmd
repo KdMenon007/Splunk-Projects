@@ -1,0 +1,17 @@
+flowchart LR
+ A[Human identities] --> E[Microsoft Entra ID]
+ B[Workload identities] --> E
+ C[Device identities] --> E
+ E --> F[Authentication and access decisions]
+ F --> G[Microsoft 365 services]
+ G --> H[Exchange Online]
+ G --> I[SharePoint and OneDrive]
+ E --> K[Sign-in logs]
+ E --> L[Directory audit logs]
+ H --> M[Workload audit activity]
+ I --> M
+ K --> N[Splunk]
+ L --> N
+ M --> N
+ N --> O[Threat hunting and correlation]
+ O --> P[Evidence timeline and report]

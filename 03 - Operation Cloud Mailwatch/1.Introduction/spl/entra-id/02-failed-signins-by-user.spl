@@ -1,0 +1,5 @@
+index="scenario" sourcetype="azure:aad:signin" status.errorCode!=0
+| stats count AS event_count values(ipAddress) AS ip_addresses values(appDisplayName) AS applications values(status.errorCode) AS error_codes min(_time) AS first_seen max(_time) AS last_seen BY userPrincipalName
+| convert ctime(first_seen) ctime(last_seen)
+| sort 0 - event_count
+| table userPrincipalName event_count ip_addresses applications error_codes first_seen last_seen

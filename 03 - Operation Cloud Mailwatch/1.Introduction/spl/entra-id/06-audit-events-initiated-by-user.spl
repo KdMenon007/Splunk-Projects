@@ -1,0 +1,3 @@
+index="scenario" sourcetype="azure:aad:audit" initiatedBy.user.userPrincipalName="$USER_UPN$"
+| sort 0 _time
+| table _time initiatedBy.user.userPrincipalName activityDisplayName result targetResources{}.userPrincipalName

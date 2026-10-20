@@ -1,0 +1,14 @@
+flowchart TD
+ A[Suspicious authentication pattern] --> B[Review sign-in events]
+ B --> C[Identify account, source, app and outcome]
+ C --> D[Check successful sign-ins and timeline]
+ D --> E[Review Entra ID audit events]
+ E --> F[Review Microsoft 365 workload activity]
+ F --> G[Correlate actor, target, IP and timestamps]
+ G --> H{Evidence supports malicious activity?}
+ H -->|Yes| I[Scope impact and prepare response]
+ H -->|Not yet| J[Record gaps and collect evidence]
+ H -->|No| K[Document benign or inconclusive result]
+ J --> B
+ I --> L[Report findings and recommendations]
+ K --> L

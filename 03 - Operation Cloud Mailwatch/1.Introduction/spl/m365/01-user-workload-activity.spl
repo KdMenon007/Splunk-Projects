@@ -1,0 +1,4 @@
+index="scenario" sourcetype="o365:management:activity" UserId="$USER_UPN$"
+| eval source_ip=coalesce(ClientIP, ClientIPAddress)
+| sort 0 _time
+| table _time Operation UserId source_ip Workload ObjectId

@@ -1,0 +1,7 @@
+index="scenario" sourcetype="azure:aad:signin" userPrincipalName="$USER_UPN$"
+| eval event_source="Entra ID sign-in", actor=userPrincipalName, activity=if(status.errorCode=0,"Sign-in success","Sign-in failure"), source_ip=ipAddress, outcome=if(status.errorCode=0,"success","failure"), target=userPrincipalName
+| fields _time event_source actor target activity source_ip outcome appDisplayName
+| append [ search index="scenario" sourcetype="azure:aad:audit" (targetResources{}.userPrincipalName="$USER_UPN$" OR initiatedBy.user.userPrincipalName="$USER_UPN$") | eval event_source="Entra ID audit", actor=coalesce('initiatedBy.user.userPrincipalName','initiatedBy.app.displayName'), target=mvjoin('targetResources{}.userPrincipalName',", "), activity=activityDisplayName, outcome=result, source_ip="" | fields _time event_source actor target activity source_ip outcome ]
+| append [ search index="scenario" sourcetype="o365:management:activity" UserId="$USER_UPN$" | eval event_source="Microsoft 365 activity", actor=UserId, target=ObjectId, activity=Operation, outcome="", source_ip=coalesce(ClientIP,ClientIPAddress) | fields _time event_source actor target activity source_ip outcome Workload ]
+| sort 0 _time
+| table _time event_source actor target activity source_ip outcome appDisplayName Workload

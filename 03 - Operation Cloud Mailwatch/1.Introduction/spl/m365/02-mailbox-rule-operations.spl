@@ -1,0 +1,5 @@
+index="scenario" sourcetype="o365:management:activity" Workload="Exchange"
+| search Operation="New-InboxRule" OR Operation="Set-InboxRule" OR Operation="Remove-InboxRule" OR Operation="UpdateInboxRules"
+| eval source_ip=coalesce(ClientIP, ClientIPAddress)
+| sort 0 _time
+| table _time UserId Operation source_ip ObjectId

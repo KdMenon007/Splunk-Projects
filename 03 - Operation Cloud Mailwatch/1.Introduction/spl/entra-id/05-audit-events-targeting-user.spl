@@ -1,0 +1,4 @@
+index="scenario" sourcetype="azure:aad:audit" targetResources{}.userPrincipalName="$USER_UPN$"
+| eval initiator=coalesce('initiatedBy.user.userPrincipalName', 'initiatedBy.app.displayName')
+| sort 0 _time
+| table _time initiator activityDisplayName result targetResources{}.userPrincipalName

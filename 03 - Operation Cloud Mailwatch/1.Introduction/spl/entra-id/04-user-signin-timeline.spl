@@ -1,0 +1,4 @@
+index="scenario" sourcetype="azure:aad:signin" userPrincipalName="$USER_UPN$"
+| eval sign_in_result=if(status.errorCode=0, "success", "failure")
+| sort 0 _time
+| table _time userPrincipalName sign_in_result status.errorCode ipAddress appDisplayName clientAppUsed conditionalAccessStatus

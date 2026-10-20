@@ -1,0 +1,5 @@
+index="scenario" sourcetype="azure:aad:signin" status.errorCode=0 ipAddress="$SOURCE_IP$"
+| stats count AS successful_events values(appDisplayName) AS applications min(_time) AS first_seen max(_time) AS last_seen BY userPrincipalName ipAddress
+| convert ctime(first_seen) ctime(last_seen)
+| sort 0 - successful_events
+| table userPrincipalName ipAddress successful_events applications first_seen last_seen

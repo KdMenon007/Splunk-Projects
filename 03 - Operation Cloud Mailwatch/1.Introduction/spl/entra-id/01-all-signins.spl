@@ -1,0 +1,3 @@
+index="scenario" sourcetype="azure:aad:signin"
+| table _time userPrincipalName appDisplayName ipAddress status.errorCode clientAppUsed conditionalAccessStatus
+| sort 0 _time
