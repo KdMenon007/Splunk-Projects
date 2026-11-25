@@ -46,10 +46,6 @@ A project focused on cloud security monitoring and defensive investigation.
 
 [📁 Explore Operation CloudGuard](./04%20-%20Operation%20CloudGuard/)
 
-### 05 — Operation Shadow Correlation
-A project focused on security-event correlation and identifying potentially suspicious activity across related events.
-
-[📁 Explore Operation Shadow Correlation](./05%20-%20Operation%20Shadow%20Correlation/)
 
 ### Splunk Cheatsheet
 A quick-reference collection for SPL syntax, search commands, and useful investigation patterns.
