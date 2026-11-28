@@ -1,5 +1,7 @@
 # Operation Cloud Mailwatch — Microsoft Cloud Identity-Threat Monitoring
 
+![Project Banner](project-banner.png)
+
 A security monitoring, threat-hunting, and incident response portfolio project focused on detecting and investigating identity-based attacks against **Microsoft Entra ID** (`finegalo.thm`) and the **Microsoft 365** services behind it (Exchange Online, SharePoint Online) and **Microsoft Intune**, using **Splunk**.
 
 > **Core idea:** in a Microsoft cloud environment the attacker's goal is often not to break into the network but to *become a legitimate identity*. This project follows that identity from the first failed password through to mailbox abuse, data exfiltration, and endpoint-management abuse.
