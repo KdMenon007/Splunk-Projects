@@ -1,0 +1,39 @@
+| 1. Entra ID Sign-In to SharePoint (Emily Turner)
+index=practice sourcetype="azure:aad:signin" user="emily.turner@tryhackme.thm" app="office:365:sharepoint:online"
+
+| 2. SharePoint File Uploads
+index=practice sourcetype="o365:management:activity" action=uploaded
+| table SourceFileName
+
+| 3. External Sharing Activity
+index=practice sourcetype="o365:management:activity" action=shared
+| table UserId
+
+| 4. File Downloads & Client Application
+index=* sourcetype="o365:management:activity" Operation=FileDownloaded
+| table _time UserId SourceFileName ApplicationDisplayName ClientIP
+
+| 5. External Link Sharing (AddedToSecureLink)
+index=* sourcetype="o365:management:activity" Operation=AddedToSecureLink
+| table _time UserId TargetUserOrGroupName SourceRelativeUrl CorrelationId
+
+| 6. Michael OneNote Read Timestamp
+index=challenge user="michael.els@tryhackme.thm" action=read
+| table CreationTime
+
+| 7. Emma Lawson External Guest Shares
+index=challenge TargetUserOrGroupType="Guest" user_id="emma.lawson@tryhackme.thm"
+| table TargetUserOrGroupName, SourceRelativeUrl
+| dedup TargetUserOrGroupName
+
+| 8. Shared Link CorrelationId Tracking
+index=challenge action=shared
+| table CorrelationId, action, TargetUserOrGroupName
+
+| 9. WebPowerPoint Presentation Access
+index=challenge action=read "AppAccessContext.ClientAppName"=WebPowerPoint
+| table object_path, action
+
+| 10. Sign-In Location & IP Review
+index=challenge sourcetype="azure:aad:signin"
+| table location.city action ipAddress appDisplayName userPrincipalName

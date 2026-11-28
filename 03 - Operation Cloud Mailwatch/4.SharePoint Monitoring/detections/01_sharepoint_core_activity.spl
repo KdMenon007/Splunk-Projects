@@ -1,0 +1,19 @@
+| Core SharePoint Workload Overview
+index=m365 Workload=SharePoint
+| table _time UserId Operation SourceFileName ObjectId SiteUrl
+| sort _time
+
+| Operation Volume Breakdown
+index=m365 Workload=SharePoint
+| stats count by Operation
+| sort - count
+
+| User Activity Baseline
+index=m365 Workload=SharePoint
+| stats count by UserId
+| sort - count
+
+| Single-User Timeline (Example: emily.turner@tryhackme.thm)
+index=m365 Workload=SharePoint UserId="emily.turner@tryhackme.thm"
+| table _time Operation SourceFileName ObjectId SiteUrl ApplicationDisplayName UserAgent
+| sort _time

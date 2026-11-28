@@ -1,0 +1,21 @@
+{
+  "title": "SharePoint Online Monitoring",
+  "panels": [
+    {
+      "name": "Entra ID Sign-Ins",
+      "query": "index=challenge sourcetype=\"azure:aad:signin\" | table location.city action ipAddress appDisplayName userPrincipalName"
+    },
+    {
+      "name": "Guest Sharing Targets",
+      "query": "index=challenge TargetUserOrGroupType=\"Guest\" user_id=\"emma.lawson@tryhackme.thm\" | table TargetUserOrGroupName, SourceRelativeUrl | dedup TargetUserOrGroupName"
+    },
+    {
+      "name": "Sharing Correlation IDs",
+      "query": "index=challenge action=shared | table CorrelationId, action, TargetUserOrGroupName"
+    },
+    {
+      "name": "WebPowerPoint Access",
+      "query": "index=challenge action=read \"AppAccessContext.ClientAppName\"=WebPowerPoint | table object_path, action"
+    }
+  ]
+}

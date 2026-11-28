@@ -1,0 +1,25 @@
+| File Access & Sensitive Filename Pivot
+index=m365 Workload=SharePoint Operation=FileAccessed
+| search SourceFileName="*password*" OR SourceFileName="*credential*" OR SourceFileName="*secret*" OR SourceFileName="*contract*" OR SourceFileName="*finance*"
+| table _time UserId SourceFileName ObjectId SiteUrl
+
+| Download Volume by User
+index=m365 Workload=SharePoint Operation=FileDownloaded
+| stats count as download_count by UserId
+| sort - download_count
+
+| Hourly Download Spikes
+index=m365 Workload=SharePoint Operation=FileDownloaded
+| bin _time span=1h
+| stats count as downloads by _time UserId
+| sort - downloads
+
+| Folder Download Investigation
+index=m365 Workload=SharePoint Operation=FileDownloaded
+| stats count values(SourceFileName) as files by UserId SourceRelativeUrl
+| sort - count
+
+| Uploads, Creations, Modifications & Deletions
+index=m365 Workload=SharePoint Operation IN(FileUploaded, FileCreated, FileModified, FileDeleted, FileRecycled)
+| table _time UserId Operation SourceFileName ObjectId SiteUrl
+| sort _time

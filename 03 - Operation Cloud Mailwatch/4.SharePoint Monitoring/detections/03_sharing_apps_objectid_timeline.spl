@@ -1,0 +1,37 @@
+| External & Internal Sharing Timeline
+index=m365 Workload=SharePoint Operation IN(AddedToSecureLink, AnonymousLinkCreated, SharingSet, SecureLinkUsed, AnonymousLinkUsed)
+| table _time UserId Operation ObjectId TargetUserOrGroupName
+| sort _time
+
+| Anonymous Link Creation
+index=m365 Workload=SharePoint Operation=AnonymousLinkCreated
+| table _time UserId ObjectId SiteUrl
+
+| Secure & Anonymous Link Usage
+index=m365 Workload=SharePoint Operation IN(SecureLinkUsed, AnonymousLinkUsed)
+| table _time UserId Operation ObjectId TargetUserOrGroupName
+| sort _time
+
+| Application & UserAgent Breakdown
+index=m365 Workload=SharePoint
+| stats count by UserId ApplicationDisplayName
+| sort - count
+
+index=m365 Workload=SharePoint
+| stats count by UserId UserAgent
+| sort - count
+
+| Rclone & Application Diversity Hunt
+index=m365 Workload=SharePoint
+| search ApplicationDisplayName="*rclone*" OR UserAgent="*rclone*"
+| table _time UserId Operation ApplicationDisplayName UserAgent ObjectId
+| sort _time
+
+index=m365 Workload=SharePoint
+| stats dc(ApplicationDisplayName) as app_count values(ApplicationDisplayName) as applications by UserId
+| sort - app_count
+
+| Full ObjectId Lifecycle Timeline
+index=m365 ObjectId="*BADFILE*"
+| table _time UserId Operation SourceFileName TargetUserOrGroupName ObjectId SiteUrl
+| sort _time
