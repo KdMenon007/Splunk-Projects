@@ -20,54 +20,81 @@ A security monitoring, threat-hunting, and incident response portfolio project f
 
 The diagram below models the full identity intrusion lifecycle observed across the investigated Entra ID telemetry—from external password-based attacks and MFA fatigue through account takeover, privilege escalation, persistence, and OAuth application exposure—mapped to the Splunk log sources and detections in this repository.
 
-flowchart TD
-    subgraph External["1. Initial Access & Credential Attacks"]
-        A1["Password Spraying: 94.20.222.248 (AZ) - 7 users / 14 failures (Error 50126)"]
-        A2["Throttling Brute Force: 38.165.231.218 (MX) - amanda.costa@finegalo.thm (4 failures)"]
-        A3["Risky Sign-In: 94.20.222.251 to allan.senna@finegalo.thm - Blocked by CAP"]
-        A4["MFA Fatigue: 149.102.234.27 (BR) to igor.bicalho@finegalo.thm - 10 denials (Error 500121)"]
+```mermaid
+flowchart LR
+    %% ───────── Attack kill chain ─────────
+    subgraph ATK["Attacker Kill Chain"]
+        direction LR
+        A1["<b>Module 01</b><br/>Password Attacks<br/>Spray 94.20.222.248 (AZ)<br/>Brute force 38.165.231.218 (MX)"]
+        A2["<b>Module 02</b><br/>Conditional Access Evasion<br/>Blocked by 'Block Suspicious Countries'"]
+        A3["<b>Module 03</b><br/>MFA Fatigue<br/>149.102.234.27 (BR)<br/>10 denials, then success"]
+        A4["<b>Module 04</b><br/>Privilege Escalation<br/>Rogue user + Global Administrator"]
+        A5["<b>Module 04</b><br/>Persistence<br/>Attacker MFA registration"]
+        A6["<b>Module 05</b><br/>OAuth Abuse<br/>Consent to app, Mail.Read.All"]
+        A1 --> A2 --> A3 --> A4 --> A5 --> A6
     end
 
-    subgraph Compromise["2. Account Compromise & Baseline Deviation"]
-        B1["amanda.costa@finegalo.thm: 3 successful logins (Error 0) from 38.165.231.218"]
-        B2["igor.bicalho@finegalo.thm: Baseline 96.0.24.134 (DK), Compromise 149.102.234.27 (BR) at 2026-03-04 13:26:22"]
+    %% ───────── Telemetry ─────────
+    subgraph LOG["Entra ID Telemetry"]
+        direction TB
+        L1[("azure:aad:signin<br/>errorCode 50126 / 500121 / 0")]
+        L2[("azure:aad:audit<br/>Add user, Add member to role,<br/>Security info registration,<br/>Consent to application")]
+        L3[("Identity Protection<br/>riskLevel / riskState")]
     end
 
-    subgraph Persistence["3. Privilege Escalation & Persistence (Audit Logs)"]
-        C1["Rogue Account Created (13:31:48.764): Add user by igor.bicalho@finegalo.thm to rafael.maciel@finegalo.thm"]
-        C2["Privilege Escalation (13:31:49.154): Add member to Global Administrator by igor.bicalho@finegalo.thm"]
-        C3["MFA Persistence (13:36): Security info registration (Add)"]
+    %% ───────── Detection ─────────
+    subgraph DET["Splunk Detections"]
+        direction TB
+        D1["01 Password spray and<br/>throttled brute force + compromise pivot"]
+        D2["02 Risky user and<br/>Conditional Access failures"]
+        D3["03 MFA fatigue and<br/>baseline country deviation"]
+        D4["04 Rogue user, Global Admin<br/>assignment, MFA registration"]
+        D5["05 App consent and<br/>high-risk Graph permissions"]
     end
 
-    subgraph OAuth["4. Cloud Application & OAuth Abuse Vector"]
-        D1["Consent to application: High-Impact Graph Permission Mail.Read.All"]
+    %% ───────── Response ─────────
+    subgraph IR["SOC Response"]
+        direction TB
+        R1["Triage and validate"]
+        R2["Contain: revoke sessions,<br/>reset credentials, block IP"]
+        R3["Eradicate: remove rogue<br/>admin and MFA methods,<br/>revoke app consent"]
+        R1 --> R2 --> R3
     end
 
-    subgraph Splunk["Splunk Detection & Hunting Layer"]
-        S1["azure:aad:signin (Modules 01, 02, 03)"]
-        S2["azure:aad:identity_protection:risky_user (Module 02)"]
-        S3["azure:aad:audit (Modules 04, 05)"]
-    end
+    %% Attack -> telemetry
+    A1 -.-> L1
+    A2 -.-> L1
+    A2 -.-> L3
+    A3 -.-> L1
+    A4 -.-> L2
+    A5 -.-> L2
+    A6 -.-> L2
 
-    A2 --> B1
-    A4 --> B2
-    B2 --> C1
-    C1 --> C2
-    C2 --> C3
+    %% Telemetry -> detections
+    L1 --> D1
+    L1 --> D2
+    L3 --> D2
+    L1 --> D3
+    L2 --> D4
+    L2 --> D5
 
-    A1 --> S1
-    A2 --> S1
-    A3 --> S1
-    A4 --> S1
-    B1 --> S1
-    B2 --> S1
+    %% Detections -> response
+    D1 --> R1
+    D2 --> R1
+    D3 --> R1
+    D4 --> R1
+    D5 --> R1
 
-    A3 --> S2
-
-    C1 --> S3
-    C2 --> S3
-    C3 --> S3
-    D1 --> S3
+    %% Styling
+    classDef atk fill:#fde2e2,stroke:#c0392b,color:#000;
+    classDef log fill:#e8f0fe,stroke:#2f5fd0,color:#000;
+    classDef det fill:#e6f7ea,stroke:#2e8b57,color:#000;
+    classDef ir fill:#fff4d6,stroke:#d4a017,color:#000;
+    class A1,A2,A3,A4,A5,A6 atk;
+    class L1,L2,L3 log;
+    class D1,D2,D3,D4,D5 det;
+    class R1,R2,R3 ir;
+```
 
 ---
 
