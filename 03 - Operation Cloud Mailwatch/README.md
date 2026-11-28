@@ -43,6 +43,15 @@ flowchart TD
     F --> H
     G --> H
     H --> I["Contain, eradicate, report"]
+
+    classDef atk fill:#fde2e2,stroke:#c0392b,color:#000;
+    classDef log fill:#e8f0fe,stroke:#2f5fd0,color:#000;
+    classDef det fill:#e6f7ea,stroke:#2e8b57,color:#000;
+    classDef ir fill:#fff4d6,stroke:#d4a017,color:#000;
+    class A,D atk;
+    class B,C,E,F,G log;
+    class H det;
+    class I ir;
 ```
 
 > **Golden rule:** never treat one authentication event as the whole incident. Build the timeline, pivot on indicators, correlate logs, and determine what happened before and after the suspicious event.
@@ -56,24 +65,18 @@ The diagram models the full identity intrusion lifecycle: external password atta
 ```mermaid
 flowchart LR
     subgraph ATK["Attacker Kill Chain"]
-        direction LR
-        A1["<b>Module 01</b><br/>Password Attacks<br/>Spray 94.20.222.248 (AZ)<br/>Brute force 38.165.231.218 (MX)"]
-        A2["<b>Module 02</b><br/>Conditional Access Evasion<br/>Blocked by 'Block Suspicious Countries'"]
-        A3["<b>Module 03</b><br/>MFA Fatigue<br/>149.102.234.27 (BR)<br/>10 denials, then success"]
-        A4["<b>Module 04</b><br/>Privilege Escalation<br/>Rogue user + Global Administrator"]
-        A5["<b>Module 04</b><br/>Persistence<br/>Attacker MFA registration"]
-        A6["<b>Module 05</b><br/>OAuth Abuse<br/>Consent to app, Mail.Read.All"]
-        A7["<b>Module 06</b><br/>Exchange Abuse<br/>Inbox rules, forwarding,<br/>delegates, internal phishing"]
-        A8["<b>Module 07</b><br/>SharePoint Abuse<br/>Mass download, external<br/>sharing, Rclone"]
-        A9["<b>Module 08</b><br/>Intune Abuse<br/>Wipe, platform scripts,<br/>app deployment"]
-        A1 --> A2 --> A3 --> A4 --> A5 --> A6
-        A6 --> A7
-        A6 --> A8
-        A6 --> A9
+        A1["<b>Stage 1 - Module 01</b><br/>Password Attacks<br/>Spray 94.20.222.248 (AZ)<br/>Brute force 38.165.231.218 (MX)"]
+        A2["<b>Stage 2 - Module 02</b><br/>Conditional Access Evasion<br/>Blocked by 'Block Suspicious Countries'"]
+        A3["<b>Stage 3 - Module 03</b><br/>MFA Fatigue<br/>149.102.234.27 (BR)<br/>10 denials, then success"]
+        A4["<b>Stage 4 - Module 04</b><br/>Privilege Escalation<br/>Rogue user + Global Administrator"]
+        A5["<b>Stage 5 - Module 04</b><br/>Persistence<br/>Attacker MFA registration"]
+        A6["<b>Stage 6 - Module 05</b><br/>OAuth Abuse<br/>Consent to app, Mail.Read.All"]
+        A7["<b>Stage 7 - Module 06</b><br/>Exchange Abuse<br/>Inbox rules, forwarding,<br/>delegates, internal phishing"]
+        A8["<b>Stage 7 - Module 07</b><br/>SharePoint Abuse<br/>Mass download, external<br/>sharing, Rclone"]
+        A9["<b>Stage 7 - Module 08</b><br/>Intune Abuse<br/>Wipe, platform scripts,<br/>app deployment"]
     end
 
     subgraph LOG["Telemetry"]
-        direction TB
         L1[("azure:aad:signin<br/>errorCode 50126 / 500121 / 0")]
         L2[("azure:aad:audit<br/>Add user, Add member to role,<br/>Security info registration,<br/>Consent to application")]
         L3[("Identity Protection<br/>riskLevel / riskState")]
@@ -83,7 +86,6 @@ flowchart LR
     end
 
     subgraph DET["Splunk Detections"]
-        direction TB
         D1["01 Password spray, throttled<br/>brute force, compromise pivot"]
         D2["02 Risky user and<br/>Conditional Access failures"]
         D3["03 MFA fatigue and<br/>baseline country deviation"]
@@ -91,60 +93,6 @@ flowchart LR
         D5["05 App consent and<br/>high-risk Graph permissions"]
         D6["06 Inbox rules, mailbox forwarding,<br/>delegates, Send, message trace"]
         D7["07 Downloads, sharing events,<br/>unusual applications"]
-        D8["08 Unmanaged-device login,<br/>wipe, script, app activity"]
-    end
-
-    subgraph IR["SOC Response"]
-        direction TB
-        R1["Triage and validate"]
-        R2["Contain: revoke sessions,<br/>reset credentials, block IP"]
-        R3["Eradicate: remove rogue admin,<br/>MFA methods, rules, delegates,<br/>sharing links, app consent"]
-        R1 --> R2 --> R3
-    end
-
-    A1 -.-> L1
-    A2 -.-> L1
-    A2 -.-> L3
-    A3 -.-> L1
-    A4 -.-> L2
-    A5 -.-> L2
-    A6 -.-> L2
-    A7 -.-> L4
-    A7 -.-> L5
-    A8 -.-> L4
-    A9 -.-> L6
-
-    L1 --> D1
-    L1 --> D2
-    L3 --> D2
-    L1 --> D3
-    L2 --> D4
-    L2 --> D5
-    L4 --> D6
-    L5 --> D6
-    L4 --> D7
-    L6 --> D8
-    L1 --> D8
-
-    D1 --> R1
-    D2 --> R1
-    D3 --> R1
-    D4 --> R1
-    D5 --> R1
-    D6 --> R1
-    D7 --> R1
-    D8 --> R1
-
-    classDef atk fill:#fde2e2,stroke:#c0392b,color:#000;
-    classDef log fill:#e8f0fe,stroke:#2f5fd0,color:#000;
-    classDef det fill:#e6f7ea,stroke:#2e8b57,color:#000;
-    classDef ir fill:#fff4d6,stroke:#d4a017,color:#000;
-    class A1,A2,A3,A4,A5,A6,A7,A8,A9 atk;
-    class L1,L2,L3,L4,L5,L6 log;
-    class D1,D2,D3,D4,D5,D6,D7,D8 det;
-    class R1,R2,R3 ir;
-```
-
 ---
 
 ## Threat Coverage & Investigation Findings
