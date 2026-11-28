@@ -7,22 +7,22 @@ This project covers **SharePoint Online Monitoring**, **External Sharing & Data 
 
 ```mermaid
 flowchart TD
-    subgraph Telemetry["1. Log Sources"]
-        S1["Entra ID Sign-In Logs (azure:aad:signin)"]
-        S2["M365 Unified Audit Logs (o365:management:activity)"]
+    subgraph Telemetry["Stage 1 - Log Sources"]
+        S1[("Entra ID Sign-In Logs<br/>azure:aad:signin")]
+        S2[("M365 Unified Audit Logs<br/>o365:management:activity")]
     end
 
-    subgraph Detections["2. SharePoint Detection & Hunting Areas"]
-        D1["SharePoint Sign-Ins and Geo/IP Anomaly"]
-        D2["File Uploads and External Sharing (AddedToSecureLink)"]
-        D3["Downloads and App Access (FileDownloaded, ApplicationDisplayName)"]
-        D4["OneNote Abuse and Presentation Exfiltration"]
+    subgraph Detections["Stage 2 - SharePoint Detection and Hunting"]
+        D1["SharePoint Sign-Ins<br/>Geo / IP anomaly"]
+        D2["File Uploads and External Sharing<br/>AddedToSecureLink"]
+        D3["Downloads and App Access<br/>FileDownloaded, ApplicationDisplayName"]
+        D4["OneNote Abuse and<br/>Presentation Exfiltration"]
     end
 
-    subgraph Response["3. Triage and Containment"]
-        R1["Correlate CorrelationId, UserId and Timestamps"]
-        R2["Revoke External Sharing Links and Sessions"]
-        R3["Contain Compromised Accounts and Scope Files"]
+    subgraph Response["Stage 3 - Triage and Containment"]
+        R1["Correlate CorrelationId,<br/>UserId and timestamps"]
+        R2["Revoke external sharing<br/>links and sessions"]
+        R3["Contain compromised accounts<br/>and scope affected files"]
     end
 
     S1 --> D1
@@ -34,6 +34,13 @@ flowchart TD
     D3 --> R1
     D4 --> R1
     R1 --> R2 --> R3
+
+    classDef log fill:#e8f0fe,stroke:#2f5fd0,color:#000;
+    classDef det fill:#e6f7ea,stroke:#2e8b57,color:#000;
+    classDef ir fill:#fff4d6,stroke:#d4a017,color:#000;
+    class S1,S2 log;
+    class D1,D2,D3,D4 det;
+    class R1,R2,R3 ir;
 ```
 
 ## Key Investigation Findings
