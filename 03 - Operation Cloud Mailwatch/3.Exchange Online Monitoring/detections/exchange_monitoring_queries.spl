@@ -1,0 +1,28 @@
+| 1. Sign-In Activity (One Outlook Web)
+index=* sourcetype="azure:aad:signin" appDisplayName="One Outlook Web"
+| table _time userPrincipalName appDisplayName ipAddress location.city status.errorCode
+| sort - _time
+
+| 2. Exchange Audit Events
+index=* sourcetype="o365:management:activity" Workload=Exchange
+| table _time UserId Operation Workload
+| sort - _time
+
+| 3. Inbox Rule Creation
+index=* Workload=Exchange Operation=New-InboxRule
+| table _time UserId Name DeleteMessage ForwardTo SubjectContainsWords
+| sort - _time
+
+| 4. Mailbox-Level Forwarding
+index=* Workload=Exchange Operation=Set-Mailbox
+| table _time UserId ForwardingSmtpAddress DeliverToMailboxAndForward
+| sort - _time
+
+| 5. Outbound Send & Message Trace
+index=* Workload=Exchange Operation=Send
+| table _time UserId Item.Subject ClientIP SaveToSentItems
+| sort - _time
+
+index=* sourcetype="o365:reporting:messagetrace"
+| table Received SenderAddress RecipientAddress Subject Status FromIP
+| sort - Received
