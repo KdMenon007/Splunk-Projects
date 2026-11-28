@@ -20,43 +20,54 @@ A security monitoring, threat-hunting, and incident response portfolio project f
 
 The diagram below models the full identity intrusion lifecycle observed across the investigated Entra ID telemetry—from external password-based attacks and MFA fatigue through account takeover, privilege escalation, persistence, and OAuth application exposure—mapped to the Splunk log sources and detections in this repository.
 
-```mermaid
 flowchart TD
     subgraph External["1. Initial Access & Credential Attacks"]
-        A1["Password Spraying<br/>94.20.222.248 (AZ)<br/>7 users / 14 failures (Error 50126)"]
-        A2["Throttling Brute Force<br/>38.165.231.218 (MX)<br/>amanda.costa@finegalo.thm (4 failures)"]
-        A3["Risky Sign-In / Anonymized IP<br/>94.20.222.251 -> allan.senna@finegalo.thm<br/>Blocked by CAP: Block Suspicious Countries"]
-        A4["MFA Fatigue / Prompt Bombing<br/>149.102.234.27 (BR) -> igor.bicalho@finegalo.thm<br/>10 MFA prompt denials (Error 500121)"]
+        A1["Password Spraying: 94.20.222.248 (AZ) - 7 users / 14 failures (Error 50126)"]
+        A2["Throttling Brute Force: 38.165.231.218 (MX) - amanda.costa@finegalo.thm (4 failures)"]
+        A3["Risky Sign-In: 94.20.222.251 to allan.senna@finegalo.thm - Blocked by CAP"]
+        A4["MFA Fatigue: 149.102.234.27 (BR) to igor.bicalho@finegalo.thm - 10 denials (Error 500121)"]
     end
 
     subgraph Compromise["2. Account Compromise & Baseline Deviation"]
-        B1["amanda.costa@finegalo.thm<br/>3 successful logins (Error 0)<br/>from 38.165.231.218"]
-        B2["igor.bicalho@finegalo.thm<br/>Baseline: 96.0.24.134 (DK)<br/>Compromise: 149.102.234.27 (BR) at 2026-03-04 13:26:22"]
+        B1["amanda.costa@finegalo.thm: 3 successful logins (Error 0) from 38.165.231.218"]
+        B2["igor.bicalho@finegalo.thm: Baseline 96.0.24.134 (DK), Compromise 149.102.234.27 (BR) at 2026-03-04 13:26:22"]
     end
 
     subgraph Persistence["3. Privilege Escalation & Persistence (Audit Logs)"]
-        C1["Rogue Account Created (13:31:48.764)<br/>Add user by igor.bicalho@finegalo.thm<br/>-> rafael.maciel@finegalo.thm"]
-        C2["Privilege Escalation (13:31:49.154)<br/>Add member to role by igor.bicalho@finegalo.thm<br/>-> Global Administrator (TenantAdmins)"]
-        C3["MFA Persistence (13:36)<br/>Security info registration (Add)"]
+        C1["Rogue Account Created (13:31:48.764): Add user by igor.bicalho@finegalo.thm to rafael.maciel@finegalo.thm"]
+        C2["Privilege Escalation (13:31:49.154): Add member to Global Administrator by igor.bicalho@finegalo.thm"]
+        C3["MFA Persistence (13:36): Security info registration (Add)"]
     end
 
     subgraph OAuth["4. Cloud Application & OAuth Abuse Vector"]
-        D1["Consent to application<br/>High-Impact Graph Permission: Mail.Read.All"]
+        D1["Consent to application: High-Impact Graph Permission Mail.Read.All"]
     end
 
     subgraph Splunk["Splunk Detection & Hunting Layer"]
-        S1["azure:aad:signin<br/>Modules 01, 02, 03"]
-        S2["azure:aad:identity_protection:risky_user<br/>Module 02"]
-        S3["azure:aad:audit<br/>Modules 04, 05"]
+        S1["azure:aad:signin (Modules 01, 02, 03)"]
+        S2["azure:aad:identity_protection:risky_user (Module 02)"]
+        S3["azure:aad:audit (Modules 04, 05)"]
     end
 
     A2 --> B1
     A4 --> B2
-    B2 --> C1 --> C2 --> C3
-    A1 & A2 & A3 & A4 & B1 & B2 --> S1
+    B2 --> C1
+    C1 --> C2
+    C2 --> C3
+
+    A1 --> S1
+    A2 --> S1
+    A3 --> S1
+    A4 --> S1
+    B1 --> S1
+    B2 --> S1
+
     A3 --> S2
-    C1 & C2 & C3 & D1 --> S3
-```
+
+    C1 --> S3
+    C2 --> S3
+    C3 --> S3
+    D1 --> S3
 
 ---
 
