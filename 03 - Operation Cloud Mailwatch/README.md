@@ -61,7 +61,6 @@ flowchart TD
 ## End-to-End Attack Kill Chain & Detection Architecture
 
 The diagram models the full identity intrusion lifecycle: external password attacks and MFA fatigue, account takeover, privilege escalation and persistence, OAuth abuse, and the post-compromise abuse of Exchange, SharePoint, and Intune. Dotted arrows show where each stage leaves evidence; solid arrows show the flow from telemetry to detections to response.
-
 ```mermaid
 flowchart LR
     subgraph ATK["Attacker Kill Chain"]
@@ -93,6 +92,44 @@ flowchart LR
         D5["05 App consent and<br/>high-risk Graph permissions"]
         D6["06 Inbox rules, mailbox forwarding,<br/>delegates, Send, message trace"]
         D7["07 Downloads, sharing events,<br/>unusual applications"]
+        D8["08 Unmanaged-device login,<br/>wipe, script, app activity"]
+    end
+
+    subgraph IR["SOC Response"]
+        R1["Triage and validate"]
+        R2["Contain: revoke sessions,<br/>reset credentials, block IP"]
+        R3["Eradicate: remove rogue admin,<br/>MFA methods, rules, delegates,<br/>sharing links, app consent"]
+    end
+
+    A1 -.-> L1
+    A2 -.-> L1 & L3
+    A3 -.-> L1
+    A4 -.-> L2
+    A5 -.-> L2
+    A6 -.-> L2
+    A7 -.-> L4 & L5
+    A8 -.-> L4
+    A9 -.-> L6
+
+    L1 --> D1 & D2 & D3 & D8
+    L2 --> D4 & D5
+    L3 --> D2
+    L4 --> D6 & D7
+    L5 --> D6
+    L6 --> D8
+
+    D1 & D2 & D3 & D4 & D5 & D6 & D7 & D8 --> R1
+    R1 --> R2 --> R3
+
+    classDef atk fill:#fde2e2,stroke:#c0392b,color:#000;
+    classDef log fill:#e8f0fe,stroke:#2f5fd0,color:#000;
+    classDef det fill:#e6f7ea,stroke:#2e8b57,color:#000;
+    classDef ir fill:#fff4d6,stroke:#d4a017,color:#000;
+    class A1,A2,A3,A4,A5,A6,A7,A8,A9 atk;
+    class L1,L2,L3,L4,L5,L6 log;
+    class D1,D2,D3,D4,D5,D6,D7,D8 det;
+    class R1,R2,R3 ir;
+```
 ---
 
 ## Threat Coverage & Investigation Findings
